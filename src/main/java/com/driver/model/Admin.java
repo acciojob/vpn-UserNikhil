@@ -5,26 +5,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "admin")
 public class Admin {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "user_name",nullable = false)
     private String username;
 
-    @Column(name = "password",nullable = false)
     private String password;
 
-    // navigational properties
-    @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
-    List<ServiceProvider> serviceProviders=new ArrayList<>();
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
+    private List<ServiceProvider> serviceProviders = new ArrayList<>();
 
-    public Admin(int id, String username, String password, List<ServiceProvider> serviceProviders) {
-        this.id = id;
+    public Admin(String username, String password) {
         this.username = username;
         this.password = password;
-        this.serviceProviders = serviceProviders;
     }
 
     public Admin() {
